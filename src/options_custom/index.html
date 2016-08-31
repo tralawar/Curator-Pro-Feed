@@ -1,0 +1,70 @@
+<!--
+// Copyright (c) 2011 Frank Kohlhepp
+// https://github.com/frankkohlhepp/fancy-settings
+// License: LGPL v2.1
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CPF Settings</title>
+        
+        <!-- Stylesheets -->
+        <link id="favicon" rel="icon" href="">
+        
+        <link rel="stylesheet" href="custom.css" media="screen">
+
+        <!-- JavaScripts -->
+
+
+    </head>
+    <body >
+
+        <div id="content">
+            <div>
+                <img src="../../icons/48.png"><h1 display="inline-block">Curator Pro Feed Settings</h1>
+            </div>
+
+            <h3>Profile Settings</h3>
+            <hr>
+           <input id="username" placeholder="Username">
+            <h3>Vote and Weight</h3>
+            <hr>
+            <div id="votes">
+            <div>
+           <input id="voteat" placeholder="30" value="30"><br>
+                 minutes after a post
+                </div>
+            <div>
+           <input id="voteweight" placeholder="100" value="100"><br>
+                 weight from 0 - 100
+            </div>
+</div>
+
+
+            <h3>Authors to Follow</h3>
+             <hr>
+          <div class="container">
+                    <div id="importList" class="button">import your steem feed</div>
+
+
+                    <div id="or">Or you may enter them manually</div>
+
+                    <input id="authorInput" placeholder="enter author name to follow">
+
+                    <div id="addAuthor" class="button">add author</div>
+
+
+                    <div id="clearListBtn" class="button">clear author list</div>
+            </div>
+              <div rowspan="5" id="authorList"></div>
+
+
+
+
+        </div>
+            <script src="authors.js"></script>
+            <script src="user.js"></script>
+
+    </body>
+</html>

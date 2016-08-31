@@ -1,0 +1,98 @@
+/*
+// Add your own style rules here, not in css/main.css
+// or css/setting.css for easy updating reasons.
+*/
+
+body{
+    color:#333;
+}
+h1{
+    display: inline-block;
+}
+input {
+
+    background: white;
+    padding: 5px;
+    border: #949494 1px solid;
+    border-radius: 2px;
+    box-shadow: #c7c7c7 0 0 5px;
+}
+#authorList{
+       max-width: 496px;
+    vertical-align: top;
+    padding-top: 1px;
+    line-height: 35px;
+    display: inline-block;
+}
+#authorList div{
+    display: inline-block;
+}
+
+.button {
+    background: white;
+    padding: 8px 0;
+    border: #1a5099 1px solid;
+    border-radius: 2px;
+    box-shadow: #c7c7c7 0 0 2px;
+    color:#1a5099;
+    text-align: center;
+    width:200px;
+}
+.button:hover{
+    box-shadow: #bbf1ff 0 0 6px;
+    cursor: pointer;
+}
+#authorInput{
+    width: 200px;
+    text-align: center;
+    padding: 8px 0;
+    font-weight: bold;
+}
+#or{
+    text-align: center;
+    padding: 8px;
+    width: 200px;
+
+}
+.container{
+    display: inline-block;
+}
+.container div, input{
+    margin-bottom: 5px;
+}
+#votes div{
+    display: inline-block;
+    text-align: center;
+}
+.author-tile{
+    position: relative;
+    padding: 0 12px;
+    text-align: center;
+    background-color: #4670a9;
+    border-radius: 2px;
+    color: #fFFFff;
+    font-weight: 300;
+    transition: all .5s linear;
+
+    margin-bottom: 4px;
+
+}
+.author-tile:hover{
+    background-color: tomato;
+    cursor: pointer;
+    box-shadow: #c7c7c7 0 0 2px;
+}
+.xclose{
+    position: absolute;
+    font-size: 12px;
+    opacity: 0;
+    color: #ffffff;
+    top: -11px;
+    right: 3px;
+}
+.author-tile:hover .xclose{
+    opacity: 1;
+}
+#username{
+        margin: 10px 0;
+}
