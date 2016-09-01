@@ -10,14 +10,16 @@ var weight = document.getElementById('voteweight');
 usernameInput.value = localStorage.getItem("username");
 
 
+
 if (localStorage.getItem('voteAt') == null) {
     localStorage.setItem('voteAt', 30);
 }
 if (localStorage.getItem('voteweight') == null){
-    localStorage.setItem('voteweight', 100);
+    localStorage.setItem('voteweight', 10000);
 }
 
-
+voteat.value = localStorage.getItem('voteAt');
+weight.value = parseInt(localStorage.getItem('voteweight'))/100;
 
 voteat.addEventListener("keyup", function(){
    localStorage.setItem("voteAt", voteat.value);
@@ -26,17 +28,23 @@ voteat.addEventListener("keyup", function(){
 
 
 weight.addEventListener("keyup", function(){
-   localStorage.setItem("voteweight", weight.value);
+   localStorage.setItem("voteweight", weight.value*100);
     console.log(localStorage.getItem('voteweight'));
 });
 
 usernameInput.addEventListener("keyup", function(){
+
+
    localStorage.setItem("username", usernameInput.value);
+    if (localStorage.username.startsWith("@"))
+            localStorage.username = localStorage.username.substring(1);
     console.log(localStorage.getItem('username'));
 });
 
 
 usernameInput.addEventListener("paste", function(){
    localStorage.setItem("username", usernameInput.value);
+    if (localStorage.username.startsWith("@"))
+            localStorage.username = localStorage.username.substring(1);
     console.log(localStorage.getItem('username'));
 });

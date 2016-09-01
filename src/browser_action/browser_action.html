@@ -9,9 +9,7 @@
         font-family: Helvetica, Ubuntu, Arial, sans-serif;
     }
 
-    table tr td:first-child {
-        max-width: 102px;
-    }
+
 
     h1 {
         font-size: 2em;
@@ -19,7 +17,7 @@
 
     .images {
         object-fit: cover;
-        width: 100px;
+        width: 120px;
         height: 64px;
     }
 
@@ -75,7 +73,7 @@
         max-height: 66px;
         max-width: 100px;
         background-size: cover;
-        height: 66px ! impor
+        height: 66px ! important;
     }
 
 </style>
@@ -93,36 +91,7 @@
 
         </table>
     </div>
-    <h2>General Options</h2>
-    <b>Settings are saved automatically on change</b><br><br>
 
-
-    <form id="options">
-        Username: <input type="text" name="username">
-
-        <div id="nameChanged" style="background-color:powderblue; display: none;">Username changed!</div>
-        <br><br>
-        <input type="checkbox" name="isActivated" checked>
-        Check for updates every
-        <select name="frequency">
-            <option>10</option>
-            <option>20</option>
-            <option>30</option>
-            <option>60</option>
-            <option>120</option>
-            <option>180</option>
-            <option>300</option>
-            <option>420</option>
-            <option>600</option>
-        </select>
-        seconds.
-        <br>
-
-        <h2>Notification Options</h2>
-        <input type="checkbox" name="notifyUpvotes" checked> Notify Upvotes <br>
-        <input type="checkbox" name="notifyDownvotes" checked> Notify Downvotes <br>
-        <input type="checkbox" name="notifyComments" checked> Notify Comments <br>
-    </form>
 </div>
 <script src="../bg/steemconnect.min.js"></script>
 <script src="../../js/browseraction.js"></script>

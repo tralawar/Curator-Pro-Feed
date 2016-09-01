@@ -39,7 +39,7 @@ function addAuthor() {
         alert('name exists');
         return
     }
-    authors =input + " " + authors;
+    authors = input + " " + authors;
     localStorage.setItem("authors", authors);
     var authorsArray = authors.split(" ");
     authorsArray.pop();
