@@ -180,18 +180,19 @@ steem.api.streamOperations(function (err, response) {
         + response[1]['title']
         + "</a></td></tr><tr><td><span data-posttime='"+ date +"' class='posttime'></span><span class='author'>"
         + author
-        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
 
     } else {
 
-        post = ("<tr><td rowspan='2'><img height='64' src='../../icons/noimg.png'></td><td class='title'><a href='https://www.steemit.com/"
+           post = ("<tr><td rowspan='2'><img height='64' src='../../icons/noimg.png'></td><td class='title'><a href='https://www.steemit.com/"
         + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" +response[1]['permlink']+"' target='_new'>"
         + response[1]['title']
         + "</a></td></tr><tr><td><span data-posttime='"+ date +"' class='posttime'></span><span class='author'>"
         + author
-        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
-    }
+        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+
+ }
     localStorage.setItem("allPosts", post);
 
 

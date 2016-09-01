@@ -100,7 +100,7 @@ function vote(e) {
         } else {
 
             var voteInMinutes = voteAtMinutes - difference;
-            var voteInSeconds = voteInMinutes / 60000;
+            var voteInSeconds = voteInMinutes * 60000;
             alert("vote in " + Math.round(voteInMinutes) + " minutes");
             console.log(voteInSeconds);
             chrome.extension.getBackgroundPage().voter30(voteInSeconds);
