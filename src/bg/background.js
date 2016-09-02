@@ -135,6 +135,10 @@ steem.api.streamOperations(function (err, response) {
     var date = Date.now();
 
 
+    if (authors.length == null){
+        return;
+    }
+
     if (localStorage.getItem("allPosts") == null) {
         var post = "Starting Feed...";
     } else {
@@ -197,6 +201,10 @@ function votenow() {
 function votedelay() {
     var currentTime = Date.now();
     var votes = JSON.parse(localStorage.getItem('votes'));
+
+    if(votes.length == null){
+        return;
+    }
 
     for (var i = 0; i < votes.length; ++i) {
 

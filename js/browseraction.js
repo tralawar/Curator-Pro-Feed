@@ -90,10 +90,10 @@ function vote(e) {
         localStorage.setItem('perm',perm);
 
         console.log(e.target.src);
-        if(e.target.src == "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/30.png"){
-            e.target.src = "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/30v.png"
-        } else if (e.target.src == "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/vote.png"){
-            e.target.src = "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/votev.png"
+        if(e.target.src == "chrome-extension://abjnadnojmilaccpdofgabajmnmkkclm/icons/30.png"){
+            e.target.src = "chrome-extension://abjnadnojmilaccpdofgabajmnmkkclm/icons/30v.png"
+        } else if (e.target.src == "chrome-extension://abjnadnojmilaccpdofgabajmnmkkclm/icons/vote.png"){
+            e.target.src = "chrome-extension://abjnadnojmilaccpdofgabajmnmkkclm/icons/votev.png"
         } else{
             return;
         }
