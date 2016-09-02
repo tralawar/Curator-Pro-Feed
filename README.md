@@ -1,6 +1,7 @@
 # Curator-Pro-Feed
 
 <h1>Installation</h1><hr>
+[Easy install here](https://chrome.google.com/webstore/detail/curator-pro-feed/abjnadnojmilaccpdofgabajmnmkkclm)
 <ul>
 <li>Download the the .zip</li>
 <li>Extract all files to your disired directory</li>
