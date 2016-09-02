@@ -42,8 +42,11 @@ function addAuthor() {
         return
     }
     authors.unshift(input);
-    localStorage.setItem("authors", JSON.stringify(authors));
-
+    if(JSON.parse(localStorage.getItem('following') != null)){
+        localStorage.setItem("authors", JSON.stringify(authors.concat(JSON.parse(localStorage.getItem('following')))));
+    }else{
+        localStorage.setItem("authors", JSON.stringify(authors));
+    }
     var HTMLize = JSON.parse(localStorage.getItem("authors"));
 
     for (var i = 0; i < HTMLize.length; ++i) {
@@ -78,6 +81,7 @@ function importAuthors(){
 function clearList() {
     localStorage.removeItem('authors');
     localStorage.removeItem("authorsHTML");
+    localStorage.removeItem('following');
 
     location.reload();
 
