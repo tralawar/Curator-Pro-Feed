@@ -165,7 +165,7 @@ steem.api.streamOperations(function (err, response) {
         + response[1]['title']
         + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
         + author
-        + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        + "</span><img data-votenow='false' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
 
     } else {
@@ -175,7 +175,7 @@ steem.api.streamOperations(function (err, response) {
         + response[1]['title']
         + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
         + author
-        + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        + "</span><img data-votenow='false' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
     }
 

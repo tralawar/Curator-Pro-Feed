@@ -88,23 +88,38 @@ function vote(e) {
         var voteAtMinutes = localStorage.getItem("voteAt");
         localStorage.setItem('name',name);
         localStorage.setItem('perm',perm);
+
+        console.log(e.target.src);
+        if(e.target.src == "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/30.png"){
+            e.target.src = "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/30v.png"
+        } else if (e.target.src == "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/vote.png"){
+            e.target.src = "chrome-extension://jfgdbklbldhljbohcephefhhhdkkehmk/icons/votev.png"
+        } else{
+            return;
+        }
+
+
+        if (votenow == ""){
+
+            return;
+        }
+
         if (votenow == "true"){
 
             chrome.extension.getBackgroundPage().votenow();
-            alert("votenow");
+
             return;
 
         }
 
         if (difference > voteAtMinutes){
-            alert("votenow");
 
-        chrome.extension.getBackgroundPage().votenow();
-        } else {
+            chrome.extension.getBackgroundPage().votenow();
+
+        } else if ( votenow == "false" ) {
 
             var voteInMinutes = voteAtMinutes - difference;
             var voteInSeconds = voteInMinutes * 60000;
-            alert("vote in " + Math.round(voteInMinutes) + " minutes");
 
             var votesToCast;
 
@@ -133,7 +148,6 @@ function vote(e) {
 
             localStorage.setItem("votes",JSON.stringify(votesToCast));
 
-            chrome.extension.getBackgroundPage().voter30(voteInSeconds);
         }
     }
     e.stopPropagation();
