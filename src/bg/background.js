@@ -7,10 +7,10 @@
 //localStorage.removeItem("authorsHTML");
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+    function (request, sender, sendResponse) {
+        chrome.pageAction.show(sender.tab.id);
+        sendResponse();
+    });
 
 // Copyright (c) 2011 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
@@ -95,7 +95,7 @@ if (!localStorage.isInitialized) {
     localStorage.lastTopic = null;
     localStorage.lastUser = null;
     localStorage.lastLink = null;
-    localStorage.username = "yourusername";
+    localStorage.username = "";
     localStorage.settingsChanged = false;
 
     localStorage.notifyUpvotes = true;
@@ -129,30 +129,19 @@ function importList() {
 
 
 
-
-
-
-
-if(authors){
-
-var authors = localStorage.getItem('authors').split(" ");
-}else{
-    var authors = localStorage.getItem('authors');
-
-}
-
-
-
-
 steem.api.streamOperations(function (err, response) {
 
-
+    var authors = JSON.parse(localStorage.getItem('authors'));
     var comment = response[0];
     var author = response[1]['author'];
     var c = response[1];
     var date = Date.now();
 
-    if (localStorage.getItem("allPosts") == null){
+
+    console.log(author,authors);
+
+
+    if (localStorage.getItem("allPosts") == null) {
         var post = "Starting Feed...";
     } else {
         var post = localStorage.getItem("allPosts");
@@ -171,44 +160,44 @@ steem.api.streamOperations(function (err, response) {
     if (!('json_metadata' in c)) {
         return;
     }
+
     var metadata = JSON.parse(c['json_metadata']);
     if ('image' in metadata) {
 
         post = ("<tr><td rowspan='2'><img class='images' height='64' src='"
-        + metadata['image'][0]
-        + "'></td><td class='title'><a href='https://www.steemit.com/"
-        + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" +response[1]['permlink']+"' target='_new'>"
-        + response[1]['title']
-        + "</a></td></tr><tr><td><span data-posttime='"+ date +"' class='posttime'></span><span class='author'>"
-        + author
-        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+            + metadata['image'][0]
+            + "'></td><td class='title'><a href='https://www.steemit.com/"
+            + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
+            + response[1]['title']
+            + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
+            + author
+            + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
 
     } else {
 
-           post = ("<tr><td rowspan='2'><img height='64' src='../../icons/noimg.png'></td><td class='title'><a href='https://www.steemit.com/"
-        + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" +response[1]['permlink']+"' target='_new'>"
-        + response[1]['title']
-        + "</a></td></tr><tr><td><span data-posttime='"+ date +"' class='posttime'></span><span class='author'>"
-        + author
-        + "</span><img data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='"+ date +"' data-author='" + author + "' data-permlink='"+c['permlink']+"' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        post = ("<tr><td rowspan='2'><img height='64' src='../../icons/noimg.png'></td><td class='title'><a href='https://www.steemit.com/"
+            + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
+            + response[1]['title']
+            + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
+            + author
+            + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
- }
+    }
+
     localStorage.setItem("allPosts", post);
 
 
 });
 
 
-
-
-function voter30(time){
+function voter30(time) {
 
     setTimeout(function () {
-            steemconnect.vote(localStorage.getItem('username'), localStorage.getItem('name'), localStorage.getItem('perm'), localStorage.getItem("voteweight"), function (err, result) {
-                console.log(err, result);
-            });
-        }, time);
+        steemconnect.vote(localStorage.getItem('username'), localStorage.getItem('name'), localStorage.getItem('perm'), localStorage.getItem("voteweight"), function (err, result) {
+            console.log(err, result);
+        });
+    }, time);
 }
 
 

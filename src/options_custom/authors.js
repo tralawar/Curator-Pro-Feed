@@ -5,6 +5,7 @@ var addAuthors = document.getElementById('addAuthor');
 var clearListBtn = document.getElementById('clearListBtn');
 var importListBtn = document.getElementById('importList');
 
+
 addAuthors.addEventListener("mouseup", addAuthor);
 clearListBtn.addEventListener("click", clearList);
 importListBtn.addEventListener("click", importAuthors);
@@ -42,7 +43,7 @@ function addAuthor() {
         return
     }
     authors.unshift(input);
-    if(JSON.parse(localStorage.getItem('following') != null)){
+    if(JSON.parse(localStorage.getItem('following') != null))   {
         localStorage.setItem("authors", JSON.stringify(authors.concat(JSON.parse(localStorage.getItem('following')))));
     }else{
         localStorage.setItem("authors", JSON.stringify(authors));

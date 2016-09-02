@@ -49,23 +49,26 @@ function timeSince(date) {
 }
 
 
+var feedCount = parseInt(localStorage.getItem('feedcount'));
+
+
 window.addEventListener('load', function () {
 
 
-    document.getElementById('feed').innerHTML = localStorage.getItem("allPosts");
+        document.getElementById('feed').innerHTML = localStorage.getItem("allPosts");
+ if(feedCount > 0) {
+        var updatetimes = document.querySelectorAll('.posttime');
+        console.log(updatetimes);
+        for (var i = 0; i < updatetimes.length; i++) {
 
-    var updatetimes = document.querySelectorAll('.posttime');
-    console.log(updatetimes);
-    for (var i = 0; i < updatetimes.length; i++) {
+            var posttime = updatetimes[i];
+            console.log(posttime);
+            var duration = timeSince(posttime.getAttribute('data-posttime'));
+            console.log(duration);
+            updatetimes[i].innerHTML = duration + " ago by ";
+        }
 
-        var posttime = updatetimes[i];
-        console.log(posttime);
-        var duration = timeSince(posttime.getAttribute('data-posttime'));
-        console.log(duration);
-        updatetimes[i].innerHTML = duration + " ago by ";
-    }
-
-
+}
 
     // Set the display activation and frequency.
 
