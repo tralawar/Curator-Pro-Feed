@@ -118,7 +118,8 @@ function importList() {
         for (ob in result) {
             importfollowing.push(result[ob]['following']);
         }
-        localStorage.setItem('following', importfollowing.join(" "));
+
+        localStorage.setItem('following', JSON.stringify(importfollowing));
 
 
     });

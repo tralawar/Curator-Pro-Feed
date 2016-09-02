@@ -9,16 +9,18 @@ addAuthors.addEventListener("mouseup", addAuthor);
 clearListBtn.addEventListener("click", clearList);
 importListBtn.addEventListener("click", importAuthors);
 
-
+//localStorage.clear();
 
 if (localStorage.getItem('authors') == null) {
-    var authors = '';
+    var authors = [];
     var authorsHTML = '';
 } else {
-    var authors = localStorage.getItem('authors');
+    var authors = JSON.parse(localStorage.getItem('authors'));
     var authorsHTML = localStorage.getItem('authorsHTML');
+    document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
+
 }
-document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
+
 
 
 document.getElementById("authorInput")
@@ -34,23 +36,23 @@ document.getElementById("authorInput")
 function addAuthor() {
 
     var input = document.getElementById("authorInput").value.toLowerCase();
-
-    if (authors.includes(" " + input + " ") == true ) {
+    console.log(authors.indexOf(input));
+    if (authors.indexOf(input) != -1  ) {
         alert('name exists');
         return
     }
-    authors = input + " " + authors;
-    localStorage.setItem("authors", authors);
-    var authorsArray = authors.split(" ");
-    authorsArray.pop();
+    authors.unshift(input);
+    localStorage.setItem("authors", JSON.stringify(authors));
 
-    for (i = 0; i < authorsArray.length; ++i) {
+    var HTMLize = JSON.parse(localStorage.getItem("authors"));
 
-        authorsArray[i] = ("<div class='author-tile' data-name='" + authorsArray[i] + "'>" + authorsArray[i] + "</div>");
+    for (var i = 0; i < HTMLize.length; ++i) {
+
+        HTMLize[i] = ("<div class='author-tile' data-name='" + HTMLize[i] + "'>" + HTMLize[i] + "</div>");
     }
 
-    authorsHTML = authorsArray.join([separator = " "]);
-    console.log(authorsArray);
+    authorsHTML = HTMLize.join([separator = " "]);
+    console.log(authors);
     localStorage.setItem('authorsHTML', authorsHTML);
     document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
 }
@@ -58,18 +60,17 @@ function addAuthor() {
 function importAuthors(){
 
     chrome.extension.getBackgroundPage().importList();
-    authors = localStorage.getItem("following") +" "+ authors;
-    localStorage.setItem("authors", authors);
-    var authorsArray = authors.split(" ");
-    authorsArray.pop();
+    var authimport = authors.concat(JSON.parse(localStorage.getItem("following")));
+    localStorage.setItem("authors", JSON.stringify(authimport));
+    var authorsArray = JSON.parse(localStorage.getItem("authors"));
 
-    for (i = 0; i < authorsArray.length; ++i) {
+
+    for (var i = 0; i < authorsArray.length; ++i) {
 
         authorsArray[i] = ("<div class='author-tile' data-name='" + authorsArray[i] + "'>" + authorsArray[i] + "</div>");
     }
 
     authorsHTML = authorsArray.join([separator = " "]);
-    console.log(authorsArray);
     localStorage.setItem('authorsHTML', authorsHTML);
     document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
 }
