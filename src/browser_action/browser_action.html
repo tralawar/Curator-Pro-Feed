@@ -4,8 +4,9 @@
 <style type="text/css">
     #mainPopup {
         padding: 10px;
-        height: 200px;
-        width: 400px;
+    height: 556px;
+    width: 400px;
+    overflow: hidden;
         font-family: Helvetica, Ubuntu, Arial, sans-serif;
     }
 
@@ -75,6 +76,11 @@
         background-size: cover;
         height: 66px ! important;
     }
+    .scroll{
+        overflow: scroll;
+    height: 700px;
+    width: 430px;
+    }
 
 </style>
 
@@ -86,7 +92,7 @@
     <a class="settings" href="../../src/options_custom/index.html" target="_new"><img src="../../icons/cog.png">
         settings</a>
 
-    <div>
+    <div class="scroll">
         <table id="feed">
 
         </table>
