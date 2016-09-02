@@ -56,17 +56,16 @@ window.addEventListener('load', function () {
 
 
         document.getElementById('feed').innerHTML = localStorage.getItem("allPosts");
- if(feedCount > 0) {
+
         var updatetimes = document.querySelectorAll('.posttime');
-        console.log(updatetimes);
+
         for (var i = 0; i < updatetimes.length; i++) {
 
             var posttime = updatetimes[i];
-            console.log(posttime);
+
             var duration = timeSince(posttime.getAttribute('data-posttime'));
-            console.log(duration);
+
             updatetimes[i].innerHTML = duration + " ago by ";
-        }
 
 }
 
@@ -75,7 +74,7 @@ window.addEventListener('load', function () {
 });
 var feed = document.querySelector("#feed");
 feed.addEventListener("click", vote, false);
-
+//localStorage.removeItem('votes');
 function vote(e) {
     if (e.target !== e.currentTarget) {
         var name = e.target.getAttribute('data-author');
@@ -85,12 +84,13 @@ function vote(e) {
         var currenttime = Date.now();
         var minutes = 60*1000;
         var difference = (currenttime/minutes) - (postime/minutes);
-        console.log(votenow);
+
         var voteAtMinutes = localStorage.getItem("voteAt");
         localStorage.setItem('name',name);
         localStorage.setItem('perm',perm);
-        if (votenow == true){
-            chrome.extension.getBackgroundPage().voter30(1);
+        if (votenow == "true"){
+
+            chrome.extension.getBackgroundPage().votenow();
             alert("votenow");
             return;
 
@@ -99,13 +99,40 @@ function vote(e) {
         if (difference > voteAtMinutes){
             alert("votenow");
 
-        chrome.extension.getBackgroundPage().voter30(1);
+        chrome.extension.getBackgroundPage().votenow();
         } else {
 
             var voteInMinutes = voteAtMinutes - difference;
             var voteInSeconds = voteInMinutes * 60000;
             alert("vote in " + Math.round(voteInMinutes) + " minutes");
-            console.log(voteInSeconds);
+
+            var votesToCast;
+
+            var voteTime = voteInSeconds + currenttime;
+
+
+
+            if(localStorage.getItem('votes')== null){
+
+                votesToCast= [];
+            } else {
+                votesToCast = JSON.parse(localStorage.getItem('votes'));
+            }
+
+
+
+
+
+
+            var castVote ="" + voteTime +" "+ localStorage.getItem('username')+ " " + localStorage.getItem('name') +" " +localStorage.getItem('perm')+" "+ localStorage.getItem("voteweight");
+
+
+
+
+            votesToCast.push(castVote);
+
+            localStorage.setItem("votes",JSON.stringify(votesToCast));
+
             chrome.extension.getBackgroundPage().voter30(voteInSeconds);
         }
     }

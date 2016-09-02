@@ -28,7 +28,7 @@ function show() {
 
 
     Notification.requestPermission(function (status) {
-        console.log(status); // notifications will only be displayed if "granted"
+
         var n = new Notification("title", {body: "notification body"}); // this also shows the notification
 
     });
@@ -126,9 +126,6 @@ function importList() {
 }
 
 
-
-
-
 steem.api.streamOperations(function (err, response) {
 
     var authors = JSON.parse(localStorage.getItem('authors'));
@@ -136,9 +133,6 @@ steem.api.streamOperations(function (err, response) {
     var author = response[1]['author'];
     var c = response[1];
     var date = Date.now();
-
-
-    console.log(author,authors);
 
 
     if (localStorage.getItem("allPosts") == null) {
@@ -165,23 +159,23 @@ steem.api.streamOperations(function (err, response) {
     if ('image' in metadata) {
 
         post = ("<tr><td rowspan='2'><img class='images' height='64' src='"
-            + metadata['image'][0]
-            + "'></td><td class='title'><a href='https://www.steemit.com/"
-            + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
-            + response[1]['title']
-            + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
-            + author
-            + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        + metadata['image'][0]
+        + "'></td><td class='title'><a href='https://www.steemit.com/"
+        + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
+        + response[1]['title']
+        + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
+        + author
+        + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
 
     } else {
 
         post = ("<tr><td rowspan='2'><img height='64' src='../../icons/noimg.png'></td><td class='title'><a href='https://www.steemit.com/"
-            + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
-            + response[1]['title']
-            + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
-            + author
-            + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
+        + response[1]['parent_permlink'] + "/@" + response[1]['author'] + "/" + response[1]['permlink'] + "' target='_new'>"
+        + response[1]['title']
+        + "</a></td></tr><tr><td><span data-posttime='" + date + "' class='posttime'></span><span class='author'>"
+        + author
+        + "</span><img data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/30.png'><img data-votenow='true' data-posttime='" + date + "' data-author='" + author + "' data-permlink='" + c['permlink'] + "' height='19' src='../../icons/vote.png'></td></tr><br>") + post;
 
     }
 
@@ -191,15 +185,43 @@ steem.api.streamOperations(function (err, response) {
 });
 
 
-function voter30(time) {
+function votenow() {
 
-    setTimeout(function () {
-        steemconnect.vote(localStorage.getItem('username'), localStorage.getItem('name'), localStorage.getItem('perm'), localStorage.getItem("voteweight"), function (err, result) {
-            console.log(err, result);
-        });
-    }, time);
+
+    steemconnect.vote(localStorage.getItem('username'), localStorage.getItem('name'), localStorage.getItem('perm'), localStorage.getItem("voteweight"), function (err, result) {
+        console.log(err, result);
+    });
+
 }
 
+function votedelay() {
+    var currentTime = Date.now();
+    var votes = JSON.parse(localStorage.getItem('votes'));
 
+    for (var i = 0; i < votes.length; ++i) {
 
+        var vote = votes[i].split(" ");
+
+        if (vote[0] < currentTime) {
+
+            steemconnect.vote(vote[1], vote[2], vote[3], vote[4], function (err, result) {
+                console.log(err, result);
+                console.log(""+vote[0]+" "+vote[1]+" "+vote[2]+" "+vote[3]+" "+vote[4]);
+
+                var index = votes.indexOf(""+vote[0]+" "+vote[1]+" "+vote[2]+" "+vote[3]+" "+vote[4]);
+                if (index != -1) {
+                    votes.splice(index, 1);
+                }
+
+                localStorage.setItem('votes', JSON.stringify(votes));
+
+            });
+
+        }
+
+    }
+
+}
+
+setInterval(votedelay, 7000);
 

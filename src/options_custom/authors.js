@@ -37,7 +37,6 @@ document.getElementById("authorInput")
 function addAuthor() {
 
     var input = document.getElementById("authorInput").value.toLowerCase();
-    console.log(authors.indexOf(input));
     if (authors.indexOf(input) != -1  ) {
         alert('name exists');
         return
@@ -56,7 +55,6 @@ function addAuthor() {
     }
 
     authorsHTML = HTMLize.join([separator = " "]);
-    console.log(authors);
     localStorage.setItem('authorsHTML', authorsHTML);
     document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
 }
