@@ -81,6 +81,7 @@ function clearList() {
     localStorage.removeItem('authors');
     localStorage.removeItem("authorsHTML");
     localStorage.removeItem('following');
+    document.getElementById('authorList').innerHTML = localStorage.getItem('authorsHTML');
 
     location.reload();
 

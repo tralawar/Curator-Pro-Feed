@@ -96,3 +96,12 @@ input {
 #username{
         margin: 10px 0;
 }
+    a:link, a:visited, a:active {
+        color: #3593ff;
+        text-decoration: blink;
+    }
+
+    a:hover {
+        color: #4ba1f0;
+        text-shadow: rgba(139, 136, 141, 0.100) 2px 1px 2px;
+    }
